@@ -1,14 +1,53 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "../Header/Navbar";
 import { ProductContext } from "../Provider/ProductContext";
 import Card from "./Card";
+import bgImg from "../../Images/main.jpg"
 
 const Home = () => {
   const [products, setProducts] = useContext(ProductContext);
 
   return (
     <>
+    <div>
+        <div
+          className="container-fluid homeImg"
+          style={{
+            paddingTop: 0,
+            backgroundColor: "#ebebeb",
+            background: `url(${bgImg})`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            height: "55vh",
+            backgroundSize: "cover",
+            position: "relative",
+          }}
+        >
+          <Navbar />
+          <div className="container col-md-10 mt-md-5 pt-md-5">
+            <p
+              className="text h1 text-center fst-italic"
+              // style={{ fontSize: "4rem"}}
+            >
+              Lets find the electronic products
+              <br />
+              By Using Gizmos <br />
+              Finder
+            </p>
+          </div>
+        </div>
+
+       
+        
+      </div>
+      <hr />
+      <div className="container">
+        <div className="row">
+          <h1 className="text-center pb-3 pt-5  fw-bold">You can find the wide ranges of electronic products here</h1>
+        </div>
+      </div>
       {/* for product card */}
       <div className="container p-4">
         <div className="row justify-content-center">

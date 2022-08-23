@@ -23,7 +23,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/customer/login";
+      const url = "http://localhost:5000/user/login";
       await axios
         .post(url, data)
         .then((result) => {

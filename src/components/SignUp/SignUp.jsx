@@ -25,7 +25,7 @@ const SignUp = () => {
     e.preventDefault();
     // console.log("something went wrong");
     try {
-      const url = "http://localhost:5000/customer/register";
+      const url = "http://localhost:5000/user/register";
       const { data: res } = await axios.post(url, data);
       setMsg(res.message);
       setData.name("")
