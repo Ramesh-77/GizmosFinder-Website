@@ -30,13 +30,13 @@ const Login = () => {
           localStorage.setItem("token", result.data.data.token);
           const token = localStorage.getItem("token");
           const tokenUser = parseJwt(token);
-          // console.log(object);
-          // console.log(result.data)
-          if (tokenUser.user?.role === "admin") {
+          // console.log(tokenUser?.role);
+          console.log(result.data)
+          if (tokenUser?.role === "admin") {
             window.location = "/admin-dashboard";
             // console.log(tokenUser.user.role);
             // console.log("this is admin dashboard");
-          } else if (tokenUser.user?.role === "user") {
+          } else if (tokenUser?.role === "user") {
             // console.log("this is user dashboard");
             window.location = "/user-dashboard";
             // console.log(tokenUser.user.role);
@@ -140,7 +140,7 @@ const Login = () => {
             >
               {/* gmail input */}
               <div className={styles.inputIcons}>
-                <i class="bi bi-envelope-fill"></i>
+                <i className="bi bi-envelope-fill"></i>
                 <input
                   id="email"
                   type="email"
@@ -154,7 +154,7 @@ const Login = () => {
               </div>
               {/* pass input */}
               <div className={styles.inputIcons}>
-                <i class="bi bi-lock-fill"></i>
+                <i className="bi bi-lock-fill"></i>
                 <input
                   id="password"
                   type="password"

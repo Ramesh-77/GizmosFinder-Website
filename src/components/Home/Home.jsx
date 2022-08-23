@@ -4,14 +4,19 @@ import { Link } from "react-router-dom";
 import Navbar from "../Header/Navbar";
 import { ProductContext } from "../Provider/ProductContext";
 import Card from "./Card";
-import bgImg from "../../Images/main.jpg"
+import bgImg from "../../Images/main.jpg";
 
 const Home = () => {
-  const [products, setProducts] = useContext(ProductContext);
+  // const [laptop, setLaptop] = useContext(ProductContext);
+  const { phoneValue, headphoneValue, laptopValue } =
+    useContext(ProductContext);
+  const [phone, setPhone] = phoneValue;
+  const [laptop, setLaptop] = laptopValue;
+  const [headphone, setHeadphone] = headphoneValue;
 
   return (
     <>
-    <div>
+      <div>
         <div
           className="container-fluid homeImg"
           style={{
@@ -38,29 +43,140 @@ const Home = () => {
             </p>
           </div>
         </div>
-
-       
-        
       </div>
       <hr />
       <div className="container">
         <div className="row">
-          <h1 className="text-center pb-3 pt-5  fw-bold">You can find the wide ranges of electronic products here</h1>
+          <h1 className="text-center pb-3 pt-5  fw-bold">
+            Headphones &amp; Earphones
+          </h1>
         </div>
       </div>
-      {/* for product card */}
+      {/* for headphone card */}
       <div className="container p-4">
-        <div className="row justify-content-center">
-          {products.map((product) => {
-            let { id, name, price, category, ratings } = product;
+        <div className="row justify-content-start">
+          {headphone.map((product) => {
             return (
-              <div className="col-md-3" key={product.id}>
-                <Card
-                  name={name}
-                  price={price}
-                  category={category}
-                  ratings={ratings}
-                />
+              <div className="col-md-3" key={product._id}>
+                <Card {...product} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <hr />
+      <div className="container">
+        <div className="row">
+          <h1 className="text-center pb-3 pt-5  fw-bold">
+            Phones &amp; Tablets
+          </h1>
+        </div>
+      </div>
+
+      {/* for phone card */}
+      <div className="container p-4">
+        <div className="row justify-content-start">
+          {phone.map((product) => {
+            let {pname, image, pprice} = product;
+            return (
+              <div className="col-md-3" key={product._id}>
+                <div className="card shadow-lg" style={{ maxHeight: "44vh" }}>
+                  <div className="product-img">
+                    <img
+                      src={"http://localhost:5000/" + image}
+                      alt=""
+                      className="img-fluid p-2"
+                      style={{
+                        display: "block",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        width: "50%",
+                      }}
+                    />
+                  </div>
+                  <div className="card-body text-center">
+                    <p>{pname}</p>
+                    <span className="text-success fw-bold">Rs. {pprice}</span>
+                  </div>
+                  <div
+                    className="d-flex flex-row justify-content-between gap-2 p-3 bg-white shadow-lg"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    <button
+                      className="btn btn-primary w-75"
+                      style={{ backgroundColor: "#3a0ca3" }}
+                    >
+                      View Details
+                    </button>
+                    <span>
+                      {/* <i className="fa-solid fa-heart fa-2x" style={{cursor: "pointer"}}></i> */}
+                      <i
+                        className="bi bi-heart fa-2x"
+                        style={{ cursor: "pointer" }}
+                      ></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <hr />
+      <div className="container">
+        <div className="row">
+          <h1 className="text-center pb-3 pt-5  fw-bold">
+            Laptops
+          </h1>
+        </div>
+      </div>
+
+       {/* for laptop card */}
+       <div className="container p-4">
+        <div className="row justify-content-start">
+          {laptop.map((product) => {
+            let {pname, image, pprice} = product;
+            return (
+              <div className="col-md-3" key={product._id}>
+                <div className="card shadow-lg" style={{ maxHeight: "44vh" }}>
+                  <div className="product-img">
+                    <img
+                      src={"http://localhost:5000/" + image}
+                      alt=""
+                      className="img-fluid p-2"
+                      style={{
+                        display: "block",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        width: "50%",
+                      }}
+                    />
+                  </div>
+                  <div className="card-body text-center">
+                    <p>{pname}</p>
+                    <span className="text-success fw-bold">Rs. {pprice}</span>
+                  </div>
+                  <div
+                    className="d-flex flex-row justify-content-between gap-2 p-3 bg-white shadow-lg"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    <button
+                      className="btn btn-primary w-75"
+                      style={{ backgroundColor: "#3a0ca3" }}
+                    >
+                      View Details
+                    </button>
+                    <span>
+                      {/* <i className="fa-solid fa-heart fa-2x" style={{cursor: "pointer"}}></i> */}
+                      <i
+                        className="bi bi-heart fa-2x"
+                        style={{ cursor: "pointer" }}
+                      ></i>
+                    </span>
+                  </div>
+                </div>
               </div>
             );
           })}

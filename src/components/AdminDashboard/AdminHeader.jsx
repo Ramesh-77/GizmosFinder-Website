@@ -8,19 +8,19 @@ const AdminHeader = () => {
         <div className="row">
           <div className="col-md-3">
             <div className="p-1 ms-5">
-              <a
-                href="#"
+              <Link
+                to="/admin-dashboard"
                 className="text-decoration-none fs-3 text-dark fw-bold"
               >
                 <span className="" style={{ color: "#25C6AA" }}>
-                  S
+                  G
                 </span>
-                potless{" "}
+                izmos{" "}
                 <span className="" style={{ color: "#25C6AA" }}>
-                  Z
+                  F
                 </span>
-                one
-              </a>
+                inder
+              </Link>
             </div>
           </div>
 
@@ -52,17 +52,7 @@ const AdminHeader = () => {
                         <span className="visually-hidden">unread messages</span>
                       </span>
                     </Link>
-                    <button
-                      type="button"
-                      className="position-relative btn ps-2 pt-0 me-3"
-                    >
-                      <i className="fa fa-shopping-cart"></i>
-                      <span className="position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger px-2 py-1">
-                        {/* {productQtyCart} */} 1
-                        <span className="visually-hidden">unread messages</span>
-                      </span>
-                    </button>
-                    <Link className="btn btn-danger px-3 ms-5" to="/addProduct">
+                    <Link className="btn btn-danger px-3 ms-5" to="/add-product">
                       Add Product
                     </Link>
                   </div>

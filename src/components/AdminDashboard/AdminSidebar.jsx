@@ -17,9 +17,9 @@ const AdminSidebar = ({ adminData }) => {
               <div className="bg-white text-dark p-3 rounded w-100">
                 <div className="d-flex justify-content-start align-items-center">
                   <div className="div">
-                    {adminData && adminData.pic ? (
+                    {adminData && adminData.image ? (
                       <img
-                        src={`http://localhost:5000/${adminData.pic}`}
+                        src={`http://localhost:5000/${adminData.image}`}
                         alt=""
                         style={{
                           width: "50px",
@@ -70,34 +70,12 @@ const AdminSidebar = ({ adminData }) => {
                     </Link>
                   </div>
                 </a>
-                {/* second navlink */}
-                <a href="#" className="nav-link w-100 my-2 mb-3 px-2 py-2">
-                  <div className="d-flex justify-content-start align-items-center">
-                    <i className="fa fa-sort text-dark fs-5 me-4"></i>
-                    <Link
-                      className="text text-dark fs-5 mb-0 text-decoration-none"
-                      to="/service-order-history"
-                    >
-                      Service Order History
-                    </Link>
-                  </div>
-                </a>
-                <a href="#" className="nav-link w-100 my-2 mb-3 px-2 py-2">
-                  <div className="d-flex justify-content-start align-items-center">
-                    <i className="fa fa-sort text-dark fs-5 me-4"></i>
-                    <Link
-                      className="text text-dark fs-5 mb-0 text-decoration-none"
-                      to="/all-product-order-history"
-                    >
-                      Product History
-                    </Link>
-                  </div>
-                </a>
+               
+             
                 {/* third navlink */}
-                <a href="#" className="nav-link w-100 my-2 mb-3 px-2 py-2">
+                <Link to="/view-admin-products" className="nav-link w-100 my-2 mb-3 px-2 py-2">
                   <div className="d-flex justify-content-start align-items-center">
                     <i className="fa fa-shopping-bag text-dark fs-5 me-4"></i>
-                    {/* <Link to="/display-all-products" className="text-decoration-none"><p className="text text-dark fs-5 mb-0">Product</p></Link> */}
                     <Link
                       className="text text-dark fs-5 mb-0 text-decoration-none"
                       to="/view-admin-products"
@@ -105,44 +83,15 @@ const AdminSidebar = ({ adminData }) => {
                       Products
                     </Link>
                   </div>
-                </a>
+                </Link>
 
                 <Link
-                  to="/view-service-category"
+                  to="/view-product-category"
                   className="nav-link w-100 my-2 mb-3 px-2 py-2"
                 >
                   <div className="d-flex justify-content-start align-items-center">
                     <i className="fa fa-sort text-dark fs-5 me-4"></i>
-                    <p className="text text-dark fs-5 mb-0">Service Category</p>
-                  </div>
-                </Link>
-
-                <Link
-                  to="/view-services"
-                  className="nav-link w-100 my-2 mb-3 px-2 py-2"
-                >
-                  <div className="d-flex justify-content-start align-items-center">
-                    <i className="fa fa-sort text-dark fs-5 me-4"></i>
-                    <p className="text text-dark fs-5 mb-0">Services</p>
-                  </div>
-                </Link>
-
-                <Link
-                  to="/admin-gallery"
-                  className="nav-link w-100 my-2 mb-3 px-2 py-2"
-                >
-                  <div className="d-flex justify-content-start align-items-center">
-                    <i class="bi bi-file-earmark-image-fill text-dark fs-5 me-4"></i>
-                    <p className="text text-dark fs-5 mb-0">Gallery</p>
-                  </div>
-                </Link>
-                <Link
-                  to="/admin-blog-home"
-                  className="nav-link w-100 my-2 mb-3 px-2 py-2"
-                >
-                  <div className="d-flex justify-content-start align-items-center">
-                    <i className="bi bi-pencil-square  text-dark fs-5 me-4"></i>
-                    <p className="text text-dark fs-5 mb-0">Blog</p>
+                    <p className="text text-dark fs-5 mb-0">Product Category</p>
                   </div>
                 </Link>
                 <a href="#" className="nav-link w-100 my-2 mb-3 px-2 py-2 ">

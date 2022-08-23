@@ -67,107 +67,105 @@ const ddata = [
 ];
 // weekly like data here
 const AdminDashboard = ({ adminData }) => {
-  const { pid } = useParams();
+  // const { pid } = useParams();
 
-  const [noti, setNoti] = React.useState([]);
-  const [users, setUsers] = React.useState([]);
-  const [orders, setOrders] = React.useState([]);
-  const [cart, setCart] = React.useState([]);
-  const [productQtyCart, setProductQtyCart] = React.useState([]);
-  const [reviews, setReviews] = React.useState(0);
-  const [productData, setProductData] = React.useState([]);
+  // const [noti, setNoti] = React.useState([]);
+  // const [users, setUsers] = React.useState([]);
+  // const [orders, setOrders] = React.useState([]);
+  // const [reviews, setReviews] = React.useState(0);
+  // const [productData, setProductData] = React.useState([]);
 
-  useEffect(() => {
-    //   for all notification either visible or not
-    axios
-      .get("http://localhost:5000/service/all-noti-unseen")
-      .then((response) => {
-        if (response) {
-          // console.log(`checking 2nd cond: ${l.length}`)
-          //   setNotiData(response.data);
-          if (response.data) {
-            setNoti(response.data);
-            // console.log(response.data);
-          }
-        } else {
-          console.log("all true");
-        }
-      })
-      .catch(() => {
-        console.log("error occur");
-      });
-    // for total number of registered users
-    axios
-      .get("http://localhost:5000/customer/register/get-total-users")
-      .then((response) => {
-        if (response) {
-          setUsers(response.data);
-        } else {
-          console.log("all true");
-        }
-      })
-      .catch(() => {
-        console.log("error occur");
-      });
-    // for total number of pending orders
-    axios
-      .get("http://localhost:5000/service/pending-service-orders")
-      .then((response) => {
-        if (response) {
-          setOrders(response.data);
-        } else {
-          console.log("all true");
-        }
-      })
-      .catch(() => {
-        console.log("error occur");
-      });
-    // for total number of registered users
-    axios
-      .get("http://localhost:5000/get-total-products-cart")
-      .then((response) => {
-        if (response) {
-          // console.log(response.data[0].productQuantity);
-          setCart(response.data);
-        } else {
-          console.log("Something went wrong");
-        }
-      })
-      .catch(() => {
-        console.log("error occur");
-      });
-    axios
-      .get("http://localhost:5000/get/product")
-      .then((result) => {
-        setProductData(result.data);
-      })
-      .catch((e) => {
-        console.log("Something Went Wrong!!");
-      });
-  }, [productData]);
+  // useEffect(() => {
+  //   //   for all notification either visible or not
+  //   axios
+  //     .get("http://localhost:5000/service/all-noti-unseen")
+  //     .then((response) => {
+  //       if (response) {
+  //         // console.log(`checking 2nd cond: ${l.length}`)
+  //         //   setNotiData(response.data);
+  //         if (response.data) {
+  //           setNoti(response.data);
+  //           // console.log(response.data);
+  //         }
+  //       } else {
+  //         console.log("all true");
+  //       }
+  //     })
+  //     .catch(() => {
+  //       console.log("error occur");
+  //     });
+  //   // for total number of registered users
+  //   axios
+  //     .get("http://localhost:5000/customer/register/get-total-users")
+  //     .then((response) => {
+  //       if (response) {
+  //         setUsers(response.data);
+  //       } else {
+  //         console.log("all true");
+  //       }
+  //     })
+  //     .catch(() => {
+  //       console.log("error occur");
+  //     });
+  //   // for total number of pending orders
+  //   axios
+  //     .get("http://localhost:5000/service/pending-service-orders")
+  //     .then((response) => {
+  //       if (response) {
+  //         setOrders(response.data);
+  //       } else {
+  //         console.log("all true");
+  //       }
+  //     })
+  //     .catch(() => {
+  //       console.log("error occur");
+  //     });
+  //   // for total number of registered users
+  //   axios
+  //     .get("http://localhost:5000/get-total-products-cart")
+  //     .then((response) => {
+  //       if (response) {
+  //         // console.log(response.data[0].productQuantity);
+  //         setCart(response.data);
+  //       } else {
+  //         console.log("Something went wrong");
+  //       }
+  //     })
+  //     .catch(() => {
+  //       console.log("error occur");
+  //     });
+  //   axios
+  //     .get("http://localhost:5000/get/product")
+  //     .then((result) => {
+  //       setProductData(result.data);
+  //     })
+  //     .catch((e) => {
+  //       console.log("Something Went Wrong!!");
+  //     });
+  // }, [productData]);
 
-  useEffect(() => {
-    calculation();
-    reviewCal();
-  });
-  // calculating total products number in cart
-  const calculation = () => {
-    setProductQtyCart(
-      cart.map((x) => x.productQuantity).reduce((x, y) => x + y, 0)
-    );
-  };
+  // useEffect(() => {
+  //   calculation();
+  //   reviewCal();
+  // });
+  // // calculating total products number in cart
+  // const calculation = () => {
+  //   setProductQtyCart(
+  //     cart.map((x) => x.productQuantity).reduce((x, y) => x + y, 0)
+  //   );
+  // };
 
-  const reviewCal = () => {
-    const totalReviews = productData
-      .map((val) => val?.reviewandrating?.length)
-      .reduce((x, y) => x + y, 0);
-    setReviews(totalReviews);
-  };
+  // const reviewCal = () => {
+  //   const totalReviews = productData
+  //     .map((val) => val?.reviewandrating?.length)
+  //     .reduce((x, y) => x + y, 0);
+  //   setReviews(totalReviews);
+  // };
 
   return (
     <>
       <div className="container-fluid ps-0 py-3 bg-light">
-        <AdminHeader noti={noti} productQtyCart={productQtyCart} />
+        <AdminHeader noti= {1}  />
         <div className="row py-4 me-4">
           <AdminSidebar adminData={adminData} />
           <div className="col-md-9">
@@ -185,7 +183,7 @@ const AdminDashboard = ({ adminData }) => {
                       </div>
                     </div>
                     <p className="text text-dark fw-bold fs-3">
-                      {users.length}
+                      1
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                       <a href="#" className="cart-link">
@@ -208,7 +206,7 @@ const AdminDashboard = ({ adminData }) => {
                         <p className="text text-success fw-bold mb-0">40%</p>
                       </div>
                     </div>
-                    <p className="text text-dark fw-bold fs-3">{reviews}</p>
+                    <p className="text text-dark fw-bold fs-3">1</p>
                     <div className="d-flex justify-content-between align-items-center">
                       <a href="#" className="cart-link">
                         See all reviews
@@ -253,7 +251,7 @@ const AdminDashboard = ({ adminData }) => {
                       </div>
                     </div>
                     <p className="text text-dark fw-bold fs-3">
-                      {orders.length}
+                      1
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                       <Link to="/service-order-history" className="cart-link">
@@ -401,7 +399,7 @@ const AdminDashboard = ({ adminData }) => {
                   <div className="row">
                     <div className="container">
                       <div className="row">
-                        {productData &&
+                        {/* {productData &&
                           productData?.map((val, _id) => {
                             return (
                               <>
@@ -448,82 +446,91 @@ const AdminDashboard = ({ adminData }) => {
                                         <div className="col-md-4">
                                           <div className="ratings-start d-flex flex-column gap-2">
                                             <span className="fs-3 fw-bold">
-
-                                              {
-                                                (val?.reviewandrating
+                                              {val?.reviewandrating
                                                 ?.map((x) => x.rating)
                                                 .reduce((x, y) => x + y, 0) /
-                                                val?.reviewandrating?.length) === 1 ? 
-                                                (val?.reviewandrating
-                                                  ?.map((x) => x.rating)
-                                                  .reduce((x, y) => x + y, 0) /
-                                                  val?.reviewandrating?.length) 
-                                                  
-                                                  
-                                                  : 
-
-
-
-
-                                                  (val?.reviewandrating
+                                                val?.reviewandrating?.length ===
+                                              1
+                                                ? val?.reviewandrating
                                                     ?.map((x) => x.rating)
-                                                    .reduce((x, y) => x + y, 0) /
-                                                    val?.reviewandrating?.length) === 2 ? 
-                                                    (val?.reviewandrating
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                  val?.reviewandrating?.length
+                                                : val?.reviewandrating
+                                                    ?.map((x) => x.rating)
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                    val?.reviewandrating
+                                                      ?.length ===
+                                                  2
+                                                ? val?.reviewandrating
+                                                    ?.map((x) => x.rating)
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                  val?.reviewandrating?.length
+                                                : val?.reviewandrating
+                                                    ?.map((x) => x.rating)
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                    val?.reviewandrating
+                                                      ?.length ===
+                                                  3
+                                                ? val?.reviewandrating
+                                                    ?.map((x) => x.rating)
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                  val?.reviewandrating?.length
+                                                : val?.reviewandrating
+                                                    ?.map((x) => x.rating)
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                    val?.reviewandrating
+                                                      ?.length ===
+                                                  4
+                                                ? val?.reviewandrating
+                                                    ?.map((x) => x.rating)
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                  val?.reviewandrating?.length
+                                                : val?.reviewandrating
+                                                    ?.map((x) => x.rating)
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                    val?.reviewandrating
+                                                      ?.length ===
+                                                  5
+                                                ? val?.reviewandrating
+                                                    ?.map((x) => x.rating)
+                                                    .reduce(
+                                                      (x, y) => x + y,
+                                                      0
+                                                    ) /
+                                                  val?.reviewandrating?.length
+                                                : (
+                                                    val?.reviewandrating
                                                       ?.map((x) => x.rating)
-                                                      .reduce((x, y) => x + y, 0) /
-                                                      val?.reviewandrating?.length) 
-
-
-                                                      : 
-
-
-
-                                                      (val?.reviewandrating
-                                                        ?.map((x) => x.rating)
-                                                        .reduce((x, y) => x + y, 0) /
-                                                        val?.reviewandrating?.length) === 3 ? 
-                                                        (val?.reviewandrating
-                                                          ?.map((x) => x.rating)
-                                                          .reduce((x, y) => x + y, 0) /
-                                                          val?.reviewandrating?.length) 
-
-
-
-
-                                                          : 
-
-
-
-                                                          (val?.reviewandrating
-                                                            ?.map((x) => x.rating)
-                                                            .reduce((x, y) => x + y, 0) /
-                                                            val?.reviewandrating?.length) === 4 ? 
-                                                            (val?.reviewandrating
-                                                              ?.map((x) => x.rating)
-                                                              .reduce((x, y) => x + y, 0) /
-                                                              val?.reviewandrating?.length) 
-
-
-                                                              : 
-
-                                                              (val?.reviewandrating
-                                                                ?.map((x) => x.rating)
-                                                                .reduce((x, y) => x + y, 0) /
-                                                                val?.reviewandrating?.length) === 5 ? 
-                                                                (val?.reviewandrating
-                                                                  ?.map((x) => x.rating)
-                                                                  .reduce((x, y) => x + y, 0) /
-                                                                  val?.reviewandrating?.length) 
-
-                                                                  : 
-
-                                                                  (val?.reviewandrating
-                                                                    ?.map((x) => x.rating)
-                                                                    .reduce((x, y) => x + y, 0) /
-                                                                    val?.reviewandrating?.length).toFixed(1)
-
-                                                }
+                                                      .reduce(
+                                                        (x, y) => x + y,
+                                                        0
+                                                      ) /
+                                                    val?.reviewandrating?.length
+                                                  ).toFixed(1)}
                                               <span className="text-secondary fw-normal fs-5">
                                                 /5
                                               </span>
@@ -538,20 +545,20 @@ const AdminDashboard = ({ adminData }) => {
                                                 <div className="stars-icons d-flex flex-row fs-4">
                                                   <i className="bi bi-star-fill text-warning mx-1"></i>
                                                   <i
-                                                    class="bi bi-star-fill "
+                                                    className="bi bi-star-fill "
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
 
                                                   <i
-                                                    class="bi bi-star-fill mx-1"
+                                                    className="bi bi-star-fill mx-1"
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                   <i
-                                                    class="bi bi-star-fill "
+                                                    className="bi bi-star-fill "
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                   <i
-                                                    class="bi bi-star-fill mx-1"
+                                                    className="bi bi-star-fill mx-1"
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                 </div>
@@ -571,21 +578,21 @@ const AdminDashboard = ({ adminData }) => {
                                                 <>
                                                   <div className="stars-icons d-flex flex-row fs-4">
                                                     <i className="bi bi-star-fill text-warning mx-1"></i>
-                                                    <i class="bi bi-star-half text-warning mx-1"></i>
+                                                    <i className="bi bi-star-half text-warning mx-1"></i>
                                                     <i
-                                                      class="bi bi-star-fill "
+                                                      className="bi bi-star-fill "
                                                       style={{
                                                         color: "#e5e5e5",
                                                       }}
                                                     ></i>
                                                     <i
-                                                      class="bi bi-star-fill "
+                                                      className="bi bi-star-fill "
                                                       style={{
                                                         color: "#e5e5e5",
                                                       }}
                                                     ></i>
                                                     <i
-                                                      class="bi bi-star-fill "
+                                                      className="bi bi-star-fill "
                                                       style={{
                                                         color: "#e5e5e5",
                                                       }}
@@ -605,15 +612,15 @@ const AdminDashboard = ({ adminData }) => {
                                                   <i className="bi bi-star-fill text-warning"></i>
 
                                                   <i
-                                                    class="bi bi-star-fill mx-1"
+                                                    className="bi bi-star-fill mx-1"
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                   <i
-                                                    class="bi bi-star-fill "
+                                                    className="bi bi-star-fill "
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                   <i
-                                                    class="bi bi-star-fill mx-1"
+                                                    className="bi bi-star-fill mx-1"
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                 </div>
@@ -635,16 +642,16 @@ const AdminDashboard = ({ adminData }) => {
                                                     <i className="bi bi-star-fill text-warning mx-1"></i>
                                                     <i className="bi bi-star-fill text-warning"></i>
 
-                                                    <i class="bi bi-star-half text-warning mx-1"></i>
+                                                    <i className="bi bi-star-half text-warning mx-1"></i>
 
                                                     <i
-                                                      class="bi bi-star-fill "
+                                                      className="bi bi-star-fill "
                                                       style={{
                                                         color: "#e5e5e5",
                                                       }}
                                                     ></i>
                                                     <i
-                                                      class="bi bi-star-fill mx-1"
+                                                      className="bi bi-star-fill mx-1"
                                                       style={{
                                                         color: "#e5e5e5",
                                                       }}
@@ -666,11 +673,11 @@ const AdminDashboard = ({ adminData }) => {
                                                   <i className="bi bi-star-fill text-warning mx-1"></i>
 
                                                   <i
-                                                    class="bi bi-star-fill "
+                                                    className="bi bi-star-fill "
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                   <i
-                                                    class="bi bi-star-fill mx-1"
+                                                    className="bi bi-star-fill mx-1"
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                 </div>
@@ -693,9 +700,9 @@ const AdminDashboard = ({ adminData }) => {
                                                     <i className="bi bi-star-fill text-warning"></i>
                                                     <i className="bi bi-star-fill text-warning mx-1"></i>
 
-                                                    <i class="bi bi-star-half text-warning mx-1"></i>
+                                                    <i className="bi bi-star-half text-warning mx-1"></i>
                                                     <i
-                                                      class="bi bi-star-fill mx-1"
+                                                      className="bi bi-star-fill mx-1"
                                                       style={{
                                                         color: "#e5e5e5",
                                                       }}
@@ -717,7 +724,7 @@ const AdminDashboard = ({ adminData }) => {
                                                   <i className="bi bi-star-fill text-warning"></i>
 
                                                   <i
-                                                    class="bi bi-star-fill mx-1"
+                                                    className="bi bi-star-fill mx-1"
                                                     style={{ color: "#e5e5e5" }}
                                                   ></i>
                                                 </div>
@@ -741,7 +748,7 @@ const AdminDashboard = ({ adminData }) => {
                                                     <i className="bi bi-star-fill text-warning mx-1"></i>
                                                     <i className="bi bi-star-fill text-warning"></i>
 
-                                                    <i class="bi bi-star-half text-warning mx-1"></i>
+                                                    <i className="bi bi-star-half text-warning mx-1"></i>
                                                   </div>
                                                 </>
                                               )}
@@ -872,7 +879,7 @@ const AdminDashboard = ({ adminData }) => {
                                               <i className="bi bi-star-fill text-warning mx-1"></i>
                                               <i className="bi bi-star-fill text-warning"></i>
                                               <i
-                                                class="bi bi-star-fill mx-1"
+                                                className="bi bi-star-fill mx-1"
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                             </span>
@@ -891,11 +898,11 @@ const AdminDashboard = ({ adminData }) => {
                                               <i className="bi bi-star-fill text-warning"></i>
                                               <i className="bi bi-star-fill text-warning mx-1"></i>
                                               <i
-                                                class="bi bi-star-fill "
+                                                className="bi bi-star-fill "
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                               <i
-                                                class="bi bi-star-fill mx-1"
+                                                className="bi bi-star-fill mx-1"
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                             </span>
@@ -913,15 +920,15 @@ const AdminDashboard = ({ adminData }) => {
                                               <i className="bi bi-star-fill text-warning mx-1"></i>
                                               <i className="bi bi-star-fill text-warning"></i>
                                               <i
-                                                class="bi bi-star-fill mx-1"
+                                                className="bi bi-star-fill mx-1"
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                               <i
-                                                class="bi bi-star-fill "
+                                                className="bi bi-star-fill "
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                               <i
-                                                class="bi bi-star-fill mx-1"
+                                                className="bi bi-star-fill mx-1"
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                             </span>
@@ -938,19 +945,19 @@ const AdminDashboard = ({ adminData }) => {
                                             <span>
                                               <i className="bi bi-star-fill text-warning mx-1"></i>
                                               <i
-                                                class="bi bi-star-fill "
+                                                className="bi bi-star-fill "
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                               <i
-                                                class="bi bi-star-fill mx-1"
+                                                className="bi bi-star-fill mx-1"
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                               <i
-                                                class="bi bi-star-fill "
+                                                className="bi bi-star-fill "
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                               <i
-                                                class="bi bi-star-fill mx-1"
+                                                className="bi bi-star-fill mx-1"
                                                 style={{ color: "#e5e5e5" }}
                                               ></i>
                                             </span>
@@ -978,35 +985,35 @@ const AdminDashboard = ({ adminData }) => {
                                                 <>
                                                   <div className="col-md-10 m-2">
                                                     <div className="userimg-review-details d-flex flex-row gap-3">
-                                                      {
-                                                        x?.pic ? (
-<img
-                                                        src={
-                                                          "http://localhost:5000/" +
-                                                          x?.pic
-                                                        }
-                                                        alt=""
-                                                        className="img-fluid"
-                                                        style={{
-                                                          width: "100px",
-                                                          height: "100px",
-                                                          borderRadius: "100%",
-                                                        }}
-                                                      />
-                                                        ): (
-                                                          <img
-                                                        src="https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-20.jpg"
-                                                        alt=""
-                                                        className="img-fluid"
-                                                        style={{
-                                                          width: "100px",
-                                                          height: "100px",
-                                                          borderRadius: "100%",
-                                                        }}
-                                                      />
-                                                        )
-                                                      }
-                                                      
+                                                      {x?.pic ? (
+                                                        <img
+                                                          src={
+                                                            "http://localhost:5000/" +
+                                                            x?.pic
+                                                          }
+                                                          alt=""
+                                                          className="img-fluid"
+                                                          style={{
+                                                            width: "100px",
+                                                            height: "100px",
+                                                            borderRadius:
+                                                              "100%",
+                                                          }}
+                                                        />
+                                                      ) : (
+                                                        <img
+                                                          src="https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-20.jpg"
+                                                          alt=""
+                                                          className="img-fluid"
+                                                          style={{
+                                                            width: "100px",
+                                                            height: "100px",
+                                                            borderRadius:
+                                                              "100%",
+                                                          }}
+                                                        />
+                                                      )}
+
                                                       <div className="reviews-detail-only d-flex flex-column gap-2">
                                                         <p className="text text-secondary mb-0">
                                                           {x?.userName}
@@ -1014,30 +1021,30 @@ const AdminDashboard = ({ adminData }) => {
                                                         <div className="d-flex justify-content-start align-items-center">
                                                           {x?.rating === 1 ? (
                                                             <>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
                                                               <i
-                                                                class="bi bi-star-fill "
+                                                                className="bi bi-star-fill "
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
                                                                 }}
                                                               ></i>
                                                               <i
-                                                                class="bi bi-star-fill mx-1"
+                                                                className="bi bi-star-fill mx-1"
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
                                                                 }}
                                                               ></i>
                                                               <i
-                                                                class="bi bi-star-fill "
+                                                                className="bi bi-star-fill "
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
                                                                 }}
                                                               ></i>
                                                               <i
-                                                                class="bi bi-star-fill mx-1"
+                                                                className="bi bi-star-fill mx-1"
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
@@ -1047,24 +1054,24 @@ const AdminDashboard = ({ adminData }) => {
                                                           ) : x?.rating ===
                                                             2 ? (
                                                             <>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
-                                                              <i class="bi bi-star-fill text-warning"></i>{" "}
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning"></i>{" "}
                                                               <i
-                                                                class="bi bi-star-fill mx-1"
+                                                                className="bi bi-star-fill mx-1"
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
                                                                 }}
                                                               ></i>
                                                               <i
-                                                                class="bi bi-star-fill "
+                                                                className="bi bi-star-fill "
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
                                                                 }}
                                                               ></i>
                                                               <i
-                                                                class="bi bi-star-fill mx-1"
+                                                                className="bi bi-star-fill mx-1"
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
@@ -1074,18 +1081,18 @@ const AdminDashboard = ({ adminData }) => {
                                                           ) : x?.rating ===
                                                             3 ? (
                                                             <>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
-                                                              <i class="bi bi-star-fill text-warning"></i>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
                                                               <i
-                                                                class="bi bi-star-fill "
+                                                                className="bi bi-star-fill "
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
                                                                 }}
                                                               ></i>
                                                               <i
-                                                                class="bi bi-star-fill mx-1"
+                                                                className="bi bi-star-fill mx-1"
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
@@ -1095,12 +1102,12 @@ const AdminDashboard = ({ adminData }) => {
                                                           ) : x?.rating ===
                                                             4 ? (
                                                             <>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
-                                                              <i class="bi bi-star-fill text-warning"></i>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
-                                                              <i class="bi bi-star-fill text-warning"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning"></i>
                                                               <i
-                                                                class="bi bi-star-fill mx-1"
+                                                                className="bi bi-star-fill mx-1"
                                                                 style={{
                                                                   color:
                                                                     "#e5e5e5",
@@ -1110,11 +1117,11 @@ const AdminDashboard = ({ adminData }) => {
                                                           ) : x?.rating ===
                                                             5 ? (
                                                             <>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
-                                                              <i class="bi bi-star-fill text-warning"></i>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
-                                                              <i class="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
+                                                              <i className="bi bi-star-fill text-warning mx-1"></i>
                                                             </>
                                                           ) : null}
                                                         </div>
@@ -1138,7 +1145,7 @@ const AdminDashboard = ({ adminData }) => {
                                 )}
                               </>
                             );
-                          })}
+                          })} */}
                       </div>
                     </div>
                   </div>

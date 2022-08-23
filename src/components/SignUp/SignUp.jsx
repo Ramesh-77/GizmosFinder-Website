@@ -157,7 +157,7 @@ const SignUp = () => {
 
               {/* gmail input */}
               <div className={styles.inputIcons}>
-                <i class="bi bi-envelope-fill"></i>
+                <i className="bi bi-envelope-fill"></i>
                 <input
                 id="email"
                   type="email"
@@ -172,7 +172,7 @@ const SignUp = () => {
 
               {/* pass input */}
               <div className={styles.inputIcons}>
-                <i class="bi bi-lock-fill"></i>
+                <i className="bi bi-lock-fill"></i>
                 <input
                 id="password"
                   type="password"
@@ -187,7 +187,7 @@ const SignUp = () => {
 
               {/* phone input */}
               <div className={styles.inputIcons}>
-                <i class="bi bi-telephone-fill"></i>
+                <i className="bi bi-telephone-fill"></i>
                 <input
                 id="phone"
                   type="phone"

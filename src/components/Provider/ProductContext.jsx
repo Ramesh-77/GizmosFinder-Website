@@ -1,41 +1,48 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
+import axios from "axios";
 
 export const ProductContext = createContext();
 
 export const ProductProvider = (props) => {
-  const [products, setProducts] = useState([
-    {
-      id: "1",
-      name: "Samsumg",
-      price: "Rs. 1000",
-      category: "Phone",
-      ratings: "5",
-    },
-    {
-      id: "2",
-      name: "Apple",
-      price: "Rs. 2000",
-      category: "Phone",
-      ratings: "4",
-    },
-    {
-      id: "3",
-      name: "Apple Earpods",
-      price: "Rs. 1500",
-      category: "Earpod",
-      ratings: "3",
-    },
-    {
-      id: "4",
-      name: "Samsumg Z-flip",
-      price: "Rs. 11000",
-      category: "Tablet",
-      ratings: "3",
-    },
-  ]);
+  const [phone, setPhone] = useState([]);
+  const [laptop, setLaptop] = useState([]);
+  const [headphone, setHeadphone] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/all-phone")
+      .then((response) => {
+        setPhone(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .get("http://localhost:5000/all-laptop")
+      .then((response) => {
+        setLaptop(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    axios
+      .get("http://localhost:5000/all-headphone")
+      .then((response) => {
+        setHeadphone(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
-    <ProductContext.Provider value={[products, setProducts]}>
+    <ProductContext.Provider
+      value={{
+        phoneValue: [phone, setPhone],
+        laptopValue: [laptop, setLaptop],
+        headphoneValue: [headphone, setHeadphone],
+      }}
+    >
       {props.children}
     </ProductContext.Provider>
   );

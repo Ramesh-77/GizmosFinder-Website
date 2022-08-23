@@ -1,10 +1,29 @@
-import pimg from "../../Images/ragnor-lothbrok.jpg";
 import { CardList } from "./CardList";
-const Card = ({name, price, category, ratings}) => {
+const Card = ({
+  pname,
+  pprice,
+  pdesc,
+  pqty,
+  name,
+  phone,
+  email,
+  categoryName,
+  image,
+}) => {
   return (
     <>
-      <div className="card shadow-lg">
-        <CardList pimg={pimg} name={name}  price={price} category={category} ratings={ratings}/>
+      <div className="card shadow-lg" style={{maxHeight: "44vh"}}>
+        <CardList
+          pname={pname}
+          pprice={pprice}
+          pdesc={pdesc}
+          pqty={pqty}
+          name={name}
+          phone={phone}
+          email={email}
+          categoryName={categoryName}
+          image={image}
+        />
       </div>
     </>
   );
