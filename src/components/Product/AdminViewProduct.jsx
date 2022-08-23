@@ -153,6 +153,7 @@ const AdminViewProduct = ({ adminData }) => {
                                             <i className="bi bi-pencil-square fa-2x text-primary"></i>
                                           </Link>
                                           <span
+                                          // onClick={(e)=>{deleteAdminProduct(e, items._id)}}
                                             onClick={deleteAdminProduct.bind(
                                               this,
                                               items._id

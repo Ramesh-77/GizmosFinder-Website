@@ -7,7 +7,6 @@ import Card from "./Card";
 import bgImg from "../../Images/main.jpg";
 
 const Home = () => {
-  // const [laptop, setLaptop] = useContext(ProductContext);
   const { phoneValue, headphoneValue, laptopValue } =
     useContext(ProductContext);
   const [phone, setPhone] = phoneValue;
@@ -55,7 +54,7 @@ const Home = () => {
       {/* for headphone card */}
       <div className="container p-4">
         <div className="row justify-content-start">
-          {headphone.map((product) => {
+          {headphone.map((product, _id) => {
             return (
               <div className="col-md-3" key={product._id}>
                 <Card {...product} />
@@ -77,8 +76,8 @@ const Home = () => {
       {/* for phone card */}
       <div className="container p-4">
         <div className="row justify-content-start">
-          {phone.map((product) => {
-            let {pname, image, pprice} = product;
+          {phone.map((product, _id) => {
+            let { pname, image, pprice } = product;
             return (
               <div className="col-md-3" key={product._id}>
                 <div className="card shadow-lg" style={{ maxHeight: "44vh" }}>
@@ -103,12 +102,12 @@ const Home = () => {
                     className="d-flex flex-row justify-content-between gap-2 p-3 bg-white shadow-lg"
                     style={{ borderRadius: "10px" }}
                   >
-                    <button
+                    <Link to={"/single-product/"+product._id}
                       className="btn btn-primary w-75"
                       style={{ backgroundColor: "#3a0ca3" }}
                     >
                       View Details
-                    </button>
+                    </Link>
                     <span>
                       {/* <i className="fa-solid fa-heart fa-2x" style={{cursor: "pointer"}}></i> */}
                       <i
@@ -127,17 +126,15 @@ const Home = () => {
       <hr />
       <div className="container">
         <div className="row">
-          <h1 className="text-center pb-3 pt-5  fw-bold">
-            Laptops
-          </h1>
+          <h1 className="text-center pb-3 pt-5  fw-bold">Laptops</h1>
         </div>
       </div>
 
-       {/* for laptop card */}
-       <div className="container p-4">
+      {/* for laptop card */}
+      <div className="container p-4">
         <div className="row justify-content-start">
-          {laptop.map((product) => {
-            let {pname, image, pprice} = product;
+          {laptop.map((product, _id) => {
+            let { pname, image, pprice } = product;
             return (
               <div className="col-md-3" key={product._id}>
                 <div className="card shadow-lg" style={{ maxHeight: "44vh" }}>
@@ -162,12 +159,13 @@ const Home = () => {
                     className="d-flex flex-row justify-content-between gap-2 p-3 bg-white shadow-lg"
                     style={{ borderRadius: "10px" }}
                   >
-                    <button
+                    <Link
+                      to={"/single-product/" + product._id}
                       className="btn btn-primary w-75"
                       style={{ backgroundColor: "#3a0ca3" }}
                     >
                       View Details
-                    </button>
+                    </Link>
                     <span>
                       {/* <i className="fa-solid fa-heart fa-2x" style={{cursor: "pointer"}}></i> */}
                       <i

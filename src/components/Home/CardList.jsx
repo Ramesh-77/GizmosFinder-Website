@@ -1,9 +1,6 @@
 import React from "react";
-export const CardList = ({
-  pname,
-  pprice,
-  image,
-}) => {
+import { Link } from "react-router-dom";
+export const CardList = ({ _id, pname, pprice, image }) => {
   return (
     <>
       <div className="product-img">
@@ -23,11 +20,20 @@ export const CardList = ({
         <p>{pname}</p>
         <span className="text-success fw-bold">Rs. {pprice}</span>
       </div>
-      <div className="d-flex flex-row justify-content-between gap-2 p-3 bg-white shadow-lg" style={{borderRadius: "10px"}}>
-        <button className="btn btn-primary w-75" style={{backgroundColor: "#3a0ca3"}}>View Details</button>
-        <span >
-        {/* <i className="fa-solid fa-heart fa-2x" style={{cursor: "pointer"}}></i> */}
-        <i className="bi bi-heart fa-2x" style={{cursor: "pointer"}}></i>
+      <div
+        className="d-flex flex-row justify-content-between gap-2 p-3 bg-white shadow-lg"
+        style={{ borderRadius: "10px" }}
+      >
+        <Link
+          to={"/single-product/" + _id}
+          className="btn btn-primary w-75"
+          style={{ backgroundColor: "#3a0ca3" }}
+        >
+          View Details
+        </Link>
+        <span>
+          {/* <i className="fa-solid fa-heart fa-2x" style={{cursor: "pointer"}}></i> */}
+          <i className="bi bi-heart fa-2x" style={{ cursor: "pointer" }}></i>
         </span>
       </div>
     </>

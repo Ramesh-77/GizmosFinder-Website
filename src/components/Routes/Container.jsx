@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AdminDashboard from "../AdminDashboard/AdminDashboard";
+import SingleProductInfo from "../Cart/SingleProductPage";
 import EmailVerify from "../EmailVerify/EmailVerify";
 import Home from "../Home/Home";
 import Login from "../Login/Login";
@@ -24,6 +25,10 @@ const Container = () => {
           path="/user/register/:id/verify/:token"
           element={<EmailVerify />}
         />
+        <Route
+          path="/single-product/:pid"
+          element={<SingleProductInfo />}
+        ></Route>
 
         {/* for admin purpose only */}
         {token && decodeUser?.role === "admin" && (
