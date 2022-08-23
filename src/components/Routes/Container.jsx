@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import AdminDashboard from "../AdminDashboard/AdminDashboard";
 import SingleProductInfo from "../Cart/SingleProductPage";
 import EmailVerify from "../EmailVerify/EmailVerify";
@@ -18,6 +19,7 @@ const Container = () => {
 
   return (
     <>
+    <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

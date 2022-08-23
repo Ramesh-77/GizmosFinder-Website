@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "./sp.css";
 import axios from "axios";
 import bgImg from "../../Images/main.jpg";
@@ -31,63 +31,39 @@ const SingleProductInfo = () => {
   const [singleproductdata, setSingleproductdata] = useState({});
 
 
-//   function parseJwt(token) {
-//     if (!token) {
-//       return;
-//     }
-//     const base64Url = token.split(".")[1];
-//     const base64 = base64Url.replace("-", "+").replace("_", "/");
-//     return JSON.parse(window.atob(base64));
-//   }
-//   // get user form the token
-//   const token_data = localStorage.getItem("token");
-//   const token = parseJwt(token_data);
-//   const user = token?.user._id;
+  function parseJwt(token) {
+    if (!token) {
+      return;
+    }
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    return JSON.parse(window.atob(base64));
+  }
+  // get user form the token
+  const token_data = localStorage.getItem("token");
+  const token = parseJwt(token_data);
+  const user = token?._id;
   // console.log(token);
   const addCart = (e) => {
     e.preventDefault();
-    // axios
-    //   .post("http://localhost:5000/add-to-cart", {
-    //     pid: pid,
-    //     userId: user,
-    //     productQuantity: singleproductdata.pqty,
-    //   })
-    //   .then((result) => {
-    //     toast.success(<SuccessMsg />, {
-    //       position: toast.POSITION.TOP_RIGHT,
-    //       autoClose: 1000,
-    //     });
-    //     console.log(result);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
+    axios
+      .post("http://localhost:5000/add-to-cart", {
+        pid: pid,
+        userId: user,
+        productQuantity: singleproductdata.pqty,
+      })
+      .then((result) => {
+        toast.success(<SuccessMsg />, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 1000,
+        });
+        console.log(result);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
-  const addToWishlist = (e) => {
-    e.preventDefault();
-    console.log("click");
-
-    // setIsMark(true);
-    // axios
-    //   .post("http://localhost:5000/add-to-wishlist", {
-    //     pid: pid,
-    //     user: user,
-    //   })
-    //   .then((result) => {
-    //     console.log(result.data);
-    //     if (result.data.success) {
-    //       toast.success(<WishlistMsg />, {
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         autoClose: true,
-    //       });
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
-  };
-  // console.log(object);
-
+ 
   useEffect(() => {
     axios
       .get("http://localhost:5000/single-product/" + pid)
@@ -157,7 +133,6 @@ const SingleProductInfo = () => {
                   Details of <span>{singleproductdata.pname}</span>
                 </h4>
                 <span
-                    onClick={addToWishlist}
                     className="mx-3 mt-3"
                     style={{ cursor: "pointer" }}
                     id="wishlistIcon"

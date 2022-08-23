@@ -3,6 +3,8 @@ import Footer from "./components/Footer/Footer";
 // import Navbar from "./components/Header/Navbar";
 import { ProductProvider } from "./components/Provider/ProductContext";
 import Container from "./components/Routes/Container";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const App = () => {
   return (
