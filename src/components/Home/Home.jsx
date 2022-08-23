@@ -5,10 +5,9 @@ import Navbar from "../Header/Navbar";
 import { ProductContext } from "../Provider/ProductContext";
 import Card from "./Card";
 import bgImg from "../../Images/main.jpg";
-import { useState } from "react";
 
 const Home = () => {
-  const { phoneValue, headphoneValue, laptopValue, searchVal } =
+  const { phoneValue, headphoneValue, laptopValue } =
     useContext(ProductContext);
   const [phone, setPhone] = phoneValue;
   const [laptop, setLaptop] = laptopValue;

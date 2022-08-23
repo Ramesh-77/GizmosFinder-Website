@@ -1,15 +1,14 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ProductContext } from "../Provider/ProductContext";
+import axios from "axios"
+import {parseJwt} from "../Utils/Utils"
 import Header from "./Header";
 
 const Navbar = () => {
-  const { searchVal } =
-    useContext(ProductContext);
-  const [searchTerm, setSearchTerm] = searchVal;
   const navigate = useNavigate();
-  const [query, setQuery] = React.useState();
+  const [query, setQuery] = useState();
+  const [cart, setCart] = useState([]);
+  const [productQtyCart, setProductQtyCart] = useState([]);
 
 
   const searching = (query) => {
@@ -19,6 +18,33 @@ const Navbar = () => {
       navigate("/search-product/" + query);
     }
   };
+
+  const token_data = localStorage.getItem("token");
+  const token = parseJwt(token_data);
+  const user = token?._id;
+  useEffect(()=>{
+    axios
+    .get("http://localhost:5000/get-products-cart/" + user)
+    .then((response) => {
+      // console.log(response.data)
+      setCart(response.data);
+    })
+    .catch(() => {
+      console.log("error occur");
+    });
+  }, [])
+
+  useEffect(() => {
+    calculation();
+  });
+
+  // calculating total products number in cart
+  const calculation = () => {
+    setProductQtyCart(
+      cart.map((x) => x.productQuantity).reduce((x, y) => x + y, 0)
+    );
+  };
+
   return (
     <>
       <Header />
@@ -87,16 +113,16 @@ const Navbar = () => {
 
               <li className="nav-item d-flex flex-row">
                 <Link
-                  to="/"
+                  to="/cart"
                   className="nav-link active position-relative"
                   aria-current="page"
                 >
                   <i className="bi bi-cart3 text-dark fs-4"></i>
                   <span className="position-absolute top-25 start-100 translate-middle badge rounded-pill bg-info px-2 py-1">
-                    0
+                  {productQtyCart}
                   </span>
                 </Link>
-                <Link to="/" className="nav-link active mt-2">
+                <Link to="/cart" className="nav-link active mt-2">
                   <span>
                     My Cart <i className="fa-solid fa-caret-down"></i>
                   </span>

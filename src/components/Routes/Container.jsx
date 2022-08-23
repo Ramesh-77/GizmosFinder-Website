@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import AdminDashboard from "../AdminDashboard/AdminDashboard";
+import ProductCart from "../Cart/Cart";
 import SingleProductInfo from "../Cart/SingleProductPage";
 import EmailVerify from "../EmailVerify/EmailVerify";
 import Home from "../Home/Home";
@@ -12,6 +13,7 @@ import ProductCategory from "../Product/ProductCategory";
 import ViewProductCategory from "../Product/ViewProductCategory";
 import ProductSearch from "../Search/SearchProduct";
 import SignUp from "../SignUp/SignUp";
+import UserDashboard from "../UserDashboard/UserDashboard";
 import { parseJwt } from "../Utils/Utils";
 const Container = () => {
   const token = localStorage.getItem("token");
@@ -19,7 +21,7 @@ const Container = () => {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -32,7 +34,7 @@ const Container = () => {
           path="/single-product/:pid"
           element={<SingleProductInfo />}
         ></Route>
-         <Route
+        <Route
           path="/search-product/:query"
           element={<ProductSearch />}
         ></Route>
@@ -64,6 +66,17 @@ const Container = () => {
             ></Route>
           </>
         )}
+
+        {token && decodeUser?.role === "user" && (<>
+          <Route
+          path="/user-dashboard"
+          element={<UserDashboard userData={decodeUser} />}
+        ></Route>
+            <Route path="/cart" element={<ProductCart />}></Route>
+
+        </>)}
+
+       
       </Routes>
     </>
   );
