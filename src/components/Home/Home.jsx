@@ -5,13 +5,15 @@ import Navbar from "../Header/Navbar";
 import { ProductContext } from "../Provider/ProductContext";
 import Card from "./Card";
 import bgImg from "../../Images/main.jpg";
+import { useState } from "react";
 
 const Home = () => {
-  const { phoneValue, headphoneValue, laptopValue } =
+  const { phoneValue, headphoneValue, laptopValue, searchVal } =
     useContext(ProductContext);
   const [phone, setPhone] = phoneValue;
   const [laptop, setLaptop] = laptopValue;
   const [headphone, setHeadphone] = headphoneValue;
+  // const [searchTerm, setSearchTerm] = searchVal;
 
   return (
     <>
@@ -24,13 +26,13 @@ const Home = () => {
             background: `url(${bgImg})`,
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            height: "55vh",
+            height: "40vh",
             backgroundSize: "cover",
             position: "relative",
           }}
         >
           <Navbar />
-          <div className="container col-md-10 mt-md-5 pt-md-5">
+          <div className="container col-md-10">
             <p
               className="text h1 text-center fst-italic"
               // style={{ fontSize: "4rem"}}
@@ -54,13 +56,23 @@ const Home = () => {
       {/* for headphone card */}
       <div className="container p-4">
         <div className="row justify-content-start">
-          {headphone.map((product, _id) => {
-            return (
-              <div className="col-md-3" key={product._id}>
-                <Card {...product} />
-              </div>
-            );
-          })}
+          {headphone
+            // .filter((product) => {
+            //   if (searchTerm === "") {
+            //     return product;
+            //   } else if (
+            //     product.pname.toLowerCase().includes(searchTerm.toLowerCase())
+            //   ) {
+            //     return product;
+            //   }
+            // })
+            .map((product, _id) => {
+              return (
+                <div className="col-md-3" key={product._id}>
+                  <Card {...product} />
+                </div>
+              );
+            })}
         </div>
       </div>
 
@@ -102,7 +114,8 @@ const Home = () => {
                     className="d-flex flex-row justify-content-between gap-2 p-3 bg-white shadow-lg"
                     style={{ borderRadius: "10px" }}
                   >
-                    <Link to={"/single-product/"+product._id}
+                    <Link
+                      to={"/single-product/" + product._id}
                       className="btn btn-primary w-75"
                       style={{ backgroundColor: "#3a0ca3" }}
                     >

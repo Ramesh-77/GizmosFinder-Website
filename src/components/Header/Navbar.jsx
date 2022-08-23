@@ -1,8 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ProductContext } from "../Provider/ProductContext";
 import Header from "./Header";
 
 const Navbar = () => {
+  const { searchVal } =
+    useContext(ProductContext);
+  const [searchTerm, setSearchTerm] = searchVal;
+  const navigate = useNavigate();
+  const [query, setQuery] = React.useState();
+
+
+  const searching = (query) => {
+    if (query === undefined) {
+      return;
+    } else {
+      navigate("/search-product/" + query);
+    }
+  };
   return (
     <>
       <Header />
@@ -40,14 +56,15 @@ const Navbar = () => {
               <div className="input-group my-3 d-flex flex-row justify-content-center">
                 <input
                   // onChange={(e) => setQuery(e.target.value)}
+                
                   type="text"
                   className="form-control"
                   placeholder="What are you looking for?"
-                  aria-label="search"
-                  aria-describedby="basic-addon1"
+                  // onChange={(event)=> setSearchTerm(event.target.value)}
+                  onChange={(e)=>setQuery(e.target.value)}
                 />
                 <button
-                  // onClick={() => searching(query)}
+                  onClick={() => searching(query)}
                   className="btn btn-secondary"
                 >
                   <i className="fas fa-search"></i>

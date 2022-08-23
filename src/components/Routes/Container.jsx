@@ -9,6 +9,7 @@ import AddProduct from "../Product/AddProduct";
 import AdminViewProduct from "../Product/AdminViewProduct";
 import ProductCategory from "../Product/ProductCategory";
 import ViewProductCategory from "../Product/ViewProductCategory";
+import ProductSearch from "../Search/SearchProduct";
 import SignUp from "../SignUp/SignUp";
 import { parseJwt } from "../Utils/Utils";
 const Container = () => {
@@ -28,6 +29,10 @@ const Container = () => {
         <Route
           path="/single-product/:pid"
           element={<SingleProductInfo />}
+        ></Route>
+         <Route
+          path="/search-product/:query"
+          element={<ProductSearch />}
         ></Route>
 
         {/* for admin purpose only */}

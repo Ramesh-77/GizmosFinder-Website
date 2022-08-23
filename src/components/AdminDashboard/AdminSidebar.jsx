@@ -70,10 +70,12 @@ const AdminSidebar = ({ adminData }) => {
                     </Link>
                   </div>
                 </a>
-               
-             
+
                 {/* third navlink */}
-                <Link to="/view-admin-products" className="nav-link w-100 my-2 mb-3 px-2 py-2">
+                <Link
+                  to="/view-admin-products"
+                  className="nav-link w-100 my-2 mb-3 px-2 py-2"
+                >
                   <div className="d-flex justify-content-start align-items-center">
                     <i className="fa fa-shopping-bag text-dark fs-5 me-4"></i>
                     <Link

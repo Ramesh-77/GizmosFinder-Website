@@ -7,6 +7,7 @@ export const ProductProvider = (props) => {
   const [phone, setPhone] = useState([]);
   const [laptop, setLaptop] = useState([]);
   const [headphone, setHeadphone] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
     axios
@@ -41,6 +42,7 @@ export const ProductProvider = (props) => {
         phoneValue: [phone, setPhone],
         laptopValue: [laptop, setLaptop],
         headphoneValue: [headphone, setHeadphone],
+        searchVal: [searchTerm, setSearchTerm]
       }}
     >
       {props.children}
