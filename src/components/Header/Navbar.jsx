@@ -18,6 +18,7 @@ const Navbar = () => {
           backgroundColor: "#f6f7f8",
         }}
       >
+      
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
             <span className="fs-4 text-info fw-bold">G</span>izmos{" "}
@@ -59,7 +60,7 @@ const Navbar = () => {
                   <i className="bi bi-person text-dark fs-4"></i>
                 </Link>
                 <Link
-                  to="/"
+                  to="/login"
                   className="nav-link active mt-2"
                   aria-current="page"
                 >
