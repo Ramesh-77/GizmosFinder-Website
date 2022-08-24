@@ -2,15 +2,42 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import KhaltiCheckout from "khalti-checkout-web";
 import bgImg from "../../Images/main.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Items from "./Items";
-import Navbar from "../Header/Navbar";
-
+import UserNavbar from "../UserDashboard/UserNavbar"
 // use reducer
 const ProductCart = () => {
   const [pdata, setProductData] = useState([]);
   const [totalprice, setTotalPrice] = useState("");
   const [productQtyCart, setProductQtyCart] = useState([]);
+
+   // khalti payment integration
+  //  let config = {
+  //   publicKey: "test_public_key_881f535efbb040ee885f85e52aff77aa",
+  //   productIdentity: "12345",
+  //   productName: "foods",
+  //   productUrl: "http://localhost:3000",
+  //   eventHandler: {
+  //     onSuccess(payload) {
+      
+  //       console.log(payload);
+  //     },
+  //     onError(error) {
+  //       console.log(error);
+  //     },
+  //     onClose() {
+  //       console.log("widget is closing");
+  //     },
+  //   },
+  //   paymentPreference: [
+  //     "KHALTI",
+  //     "EBANKING",
+  //     "MOBILE_BANKING",
+  //     "CONNECT_IPS",
+  //     "SCT",
+  //   ],
+  // };
+  // let checkout = new KhaltiCheckout(config);
 
   function parseJwt(token) {
     if (!token) {
@@ -57,13 +84,18 @@ const ProductCart = () => {
       pdata.map((x) => x.productQuantity).reduce((x, y) => x + y, 0)
     );
   };
-  const navigate = useNavigate();
 
-  const proceed = () => {
-    navigate("/checkout", { state: pdata });
-  };
+  const handlePay = ()=>{
+    let confirm = window.confirm("Do you want to make payment?");
+    if(confirm){
+      
+        window.location.href = "/delete-cart-product"
+      
+    }else{
+      console.log("fail")
+    }
+  }
 
-  
 
   const headers = [
     { key: "image", label: "Product Image" },
@@ -89,7 +121,7 @@ const ProductCart = () => {
           position: "relative",
         }}
       >
-        <Navbar />
+        <UserNavbar />
 
         <div className="bread-crumb-section">
           <h1 className="text-center my-4 fw-bold">Cart</h1>
@@ -193,8 +225,15 @@ const ProductCart = () => {
                       </div>
                     </div>
                     <div className="flex-btns" style={{ textAlign: "end" }}>
-                      <button onClick={proceed} className="btn btn-warning ">
-                        Proceed to checkout
+                      <button
+                        // onClick={() =>
+                        //   checkout.show({ amount: 1000, mobile: 9861905670 })
+                        // }
+                        onClick={handlePay}
+                        className="btn btn-warning "
+                        style={{cursor: "pointer"}}
+                      >
+                        Make Payment
                       </button>
                       <Link
                         to="/display-all-products"

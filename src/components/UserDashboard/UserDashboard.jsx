@@ -1,6 +1,6 @@
 import React from "react";
 import bgImg from "../../Images/main.jpg";
-import Navbar from "../Header/Navbar";
+import UserNavbar from "../UserDashboard/UserNavbar";
 import userImg from "../../Images/ragnor-lothbrok.jpg"
 const UserDashboard = ({userData}) => {
   // console.log(userData._id)
@@ -49,7 +49,7 @@ const UserDashboard = ({userData}) => {
           position: "relative",
         }}
       >
-        <Navbar />
+        <UserNavbar />
       </div>
       <div className="bg-light container-fluid p-0">
         <div className="container col-md-8 py-4 mb-4">

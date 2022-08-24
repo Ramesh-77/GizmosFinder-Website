@@ -49,13 +49,6 @@ const ProductSearch = (props) => {
       <div className="container-fluid py-3 text-center">
         <h3 className="text-success">
           Showing search result for  '{query}'{/* <br /> */}
-          {/* <span className="fs-5">
-            Believing on{" "}
-            <span className="fw-normal fs-6">
-              "Don't find Customers for your products instead find products for
-              your customers".
-            </span>
-          </span>{" "} */}
         </h3>
       </div>
 

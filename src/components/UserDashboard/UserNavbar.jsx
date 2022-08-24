@@ -1,11 +1,14 @@
-import React, {useState } from "react";
-import { Link, useNavigate } from "react-router-dom"
-import Header from "./Header";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
+import {parseJwt} from "../Utils/Utils"
+import Header from "../Header/Header";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState();
-
+  const [cart, setCart] = useState([]);
+  const [productQtyCart, setProductQtyCart] = useState([]);
 
 
   const searching = (query) => {
@@ -16,10 +19,35 @@ const Navbar = () => {
     }
   };
 
+  const token_data = localStorage.getItem("token");
+  const token = parseJwt(token_data);
+  const user = token?._id;
+  useEffect(()=>{
+    axios
+    .get("http://localhost:5000/get-products-cart/" + user)
+    .then((response) => {
+      // console.log(response.data)
+      setCart(response.data);
+    })
+    .catch(() => {
+      console.log("error occur");
+    });
+  }, [])
 
- 
+  useEffect(() => {
+    calculation();
+  });
+
+  // calculating total products number in cart
+  const calculation = () => {
+    setProductQtyCart(
+      cart.map((x) => x.productQuantity).reduce((x, y) => x + y, 0)
+    );
+  };
+
   return (
     <>
+    
       <Header />
       <nav
         className="navbar navbar-expand-lg"
@@ -35,7 +63,7 @@ const Navbar = () => {
       >
       
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
+          <Link to="/user-dashboard" className="navbar-brand">
             <span className="fs-4 text-info fw-bold">G</span>izmos{" "}
             <span className="fs-4 text-info fw-bold">F</span>inder
           </Link>
@@ -51,6 +79,17 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item mx-2">
+                <Link
+                  to="/user-dashboard"
+                  className="nav-link active mt-2 text-uppercase"
+                  aria-current="page"
+                >
+                  Dashboard 
+                </Link>
+              </li>
+              </ul>
             <form className="d-flex justify-content-start align-items-center w-75">
               <div className="input-group my-3 d-flex flex-row justify-content-center">
                 <input
@@ -92,7 +131,7 @@ const Navbar = () => {
                 >
                   <i className="bi bi-cart3 text-dark fs-4"></i>
                   <span className="position-absolute top-25 start-100 translate-middle badge rounded-pill bg-info px-2 py-1">
-                  0
+                  {productQtyCart}
                   </span>
                 </Link>
                 <Link to="/cart" className="nav-link active mt-2">
@@ -105,7 +144,10 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-    </>
+    
+     
+      
+   </>
   );
 };
 

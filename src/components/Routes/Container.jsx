@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import AdminDashboard from "../AdminDashboard/AdminDashboard";
 import ProductCart from "../Cart/Cart";
+import DeleteCart from "../Cart/CartDelete";
 import SingleProductInfo from "../Cart/SingleProductPage";
 import EmailVerify from "../EmailVerify/EmailVerify";
 import Home from "../Home/Home";
@@ -67,16 +68,17 @@ const Container = () => {
           </>
         )}
 
-        {token && decodeUser?.role === "user" && (<>
-          <Route
-          path="/user-dashboard"
-          element={<UserDashboard userData={decodeUser} />}
-        ></Route>
+        {token && decodeUser?.role === "user" && (
+          <>
+            <Route
+              path="/user-dashboard"
+              element={<UserDashboard userData={decodeUser} />}
+            ></Route>
             <Route path="/cart" element={<ProductCart />}></Route>
+          </>
+        )}
 
-        </>)}
-
-       
+        <Route path="/delete-cart-product" element={<DeleteCart />}></Route>
       </Routes>
     </>
   );
